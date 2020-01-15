@@ -14,13 +14,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "copies")
 public class Copies 
 {
 	private Integer id;
+	@JsonIgnore
 	private String status;
 	private int rack;
+	@JsonIgnore
 	private List<IssueRecord> issueRecordList = new ArrayList<>();
 	private Books book;
 	public Copies() {

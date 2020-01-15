@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties(value= {"paymentList","issueRecordList"})
 public class Users 
 {
 	private Integer id;
@@ -15,8 +18,8 @@ public class Users
 	private String phone;
 	private String password;
 	private Role role;
-	private List<Payments> paymentList;
-	private List<IssueRecord> issueRecordList;
+	private List<Payments> paymentList = new ArrayList<>();
+	private List<IssueRecord> issueRecordList = new ArrayList<>();;
 	public Users() {
 		// TODO Auto-generated constructor stub
 	}
@@ -71,14 +74,14 @@ public class Users
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
 	public List<Payments> getPaymentList() {
 		return paymentList;
 	}
 	public void setPaymentList(List<Payments> paymentList) {
 		this.paymentList = paymentList;
 	}
-	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
 	public List<IssueRecord> getIssueRecordList() {
 		return issueRecordList;
 	}
